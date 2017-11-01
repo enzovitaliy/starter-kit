@@ -6,6 +6,8 @@ const imagemin     = require('gulp-imagemin');
 const htmlmin      = require('gulp-htmlmin');
 const browserSync  = require('browser-sync').create();
 const del          = require('del');
+const ftp          = require('gulp-ftp');
+const gutil        = require('gulp-util');
 
 gulp.task('sass', function() {
   return gulp.src('src/styles/sass/**/*.sass')
@@ -44,6 +46,17 @@ gulp.task('server', ['sass'], function() {
 });
 
 gulp.task('rmdist', function() { return del.sync('dist'); });
+
+gulp.task('ftp', function() {
+  return gulp.src('dist/**/*')
+    .pipe(ftp({
+      host: 'host',
+      user: 'user',
+      pass: 'pass',
+      remotePath: '/'
+    }))
+    .pipe(gutil.noop());
+});
 
 gulp.task('build', ['rmdist', 'sass', 'mincss', 'imagemin', 'htmlmin']);
 
