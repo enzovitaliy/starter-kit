@@ -1,6 +1,8 @@
 const gulp         = require('gulp');
 const sass         = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
+const concat       = require('gulp-concat');
+const uglify       = require('gulp-uglify');
 const cleanCSS     = require('gulp-clean-css');
 const imagemin     = require('gulp-imagemin');
 const htmlmin      = require('gulp-htmlmin');
@@ -17,10 +19,23 @@ gulp.task('sass', function() {
     .pipe(browserSync.stream());
 });
 
+gulp.task('js', function() {
+  return gulp.src(['!src/scripts/main.js', 'src/scripts/**/*.js'])
+    .pipe(concat('main.js'))
+    .pipe(gulp.dest('src/scripts'))
+    .pipe(browserSync.stream());
+});
+
 gulp.task('mincss', function() {
   return gulp.src('src/styles/main.css')
     .pipe(cleanCSS())
     .pipe(gulp.dest('dist/styles'));
+});
+
+gulp.task('minjs', function() {
+  return gulp.src('src/scripts/main.js')
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/scripts'));
 });
 
 gulp.task('imagemin', function() {
@@ -35,11 +50,12 @@ gulp.task('htmlmin', function() {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('server', ['sass'], function() {
+gulp.task('server', ['sass', 'js'], function() {
 
   browserSync.init({server: 'src', notify: false});
 
   gulp.watch('src/styles/sass/**/*.sass', ['sass']);
+  gulp.watch('src/scripts/common.js', ['js']);
   gulp.watch('src/images/**/*').on('change', browserSync.reload);
   gulp.watch('src/**/*.html').on('change', browserSync.reload);
 
@@ -58,6 +74,6 @@ gulp.task('ftp', function() {
     .pipe(gutil.noop());
 });
 
-gulp.task('build', ['rmdist', 'sass', 'mincss', 'imagemin', 'htmlmin']);
+gulp.task('build', ['rmdist', 'sass', 'js', 'mincss', 'minjs', 'imagemin', 'htmlmin']);
 
 gulp.task('default', ['server']);
