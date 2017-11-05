@@ -61,7 +61,7 @@ gulp.task('server', ['sass', 'js'], function() {
 
 });
 
-gulp.task('rmdist', function() { return del.sync('dist'); });
+gulp.task('rmdist', function() { return del.sync('dist', {read: false}); });
 
 gulp.task('ftp', ['build'], function() {
   return gulp.src('dist/**/*')
