@@ -6,6 +6,7 @@ const autoprefixer = require('gulp-autoprefixer');
 const concat       = require('gulp-concat');
 const uglify       = require('gulp-uglify');
 const cleanCSS     = require('gulp-clean-css');
+const cache        = require('gulp-cache');
 const imagemin     = require('gulp-imagemin');
 const htmlmin      = require('gulp-htmlmin');
 const browserSync  = require('browser-sync').create();
@@ -42,7 +43,7 @@ gulp.task('minjs', function() {
 
 gulp.task('imagemin', function() {
   return gulp.src('src/images/**/*')
-    .pipe(imagemin())
+    .pipe(cache(imagemin()))
     .pipe(gulp.dest('dist/images'));
 });
 
