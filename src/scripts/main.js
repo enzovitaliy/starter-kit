@@ -10252,6 +10252,3 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-'use strict';
-
-// alert('Hello, world!');
