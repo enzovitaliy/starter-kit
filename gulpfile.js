@@ -1,5 +1,3 @@
-'use strict';
-
 const gulp         = require('gulp');
 const sass         = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
@@ -23,7 +21,10 @@ gulp.task('sass', function() {
 });
 
 gulp.task('js', function() {
-  return gulp.src(['!src/scripts/main.js', 'src/scripts/**/*.js'])
+  return gulp.src([
+    'src/scripts/libs/jquery-3.2.1.js',
+    'src/scripts/common.js'
+    ])
     .pipe(concat('main.js'))
     .pipe(gulp.dest('src/scripts'))
     .pipe(browserSync.stream());
