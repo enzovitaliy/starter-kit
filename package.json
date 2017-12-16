@@ -1,6 +1,6 @@
 {
-  "version": "1.0.5",
   "private": true,
+  "version": "1.0.5",
   "devDependencies": {
     "browser-sync": "^2.18.13",
     "del": "^3.0.0",
