@@ -1,19 +1,19 @@
-const gulp         = require('gulp');
-const sass         = require('gulp-sass');
-const autoprefixer = require('gulp-autoprefixer');
-const concat       = require('gulp-concat');
-const uglify       = require('gulp-uglify');
-const cleanCSS     = require('gulp-clean-css');
-const cache        = require('gulp-cache');
-const imagemin     = require('gulp-imagemin');
-const htmlmin      = require('gulp-htmlmin');
-const browserSync  = require('browser-sync').create();
-const del          = require('del');
-const ftp          = require('gulp-ftp');
-const gutil        = require('gulp-util');
+var gulp         = require('gulp'),
+    sass         = require('gulp-sass'),
+    autoprefixer = require('gulp-autoprefixer'),
+    concat       = require('gulp-concat'),
+    uglify       = require('gulp-uglify'),
+    cleanCSS     = require('gulp-clean-css'),
+    cache        = require('gulp-cache'),
+    imagemin     = require('gulp-imagemin'),
+    htmlmin      = require('gulp-htmlmin'),
+    browserSync  = require('browser-sync').create(),
+    del          = require('del'),
+    ftp          = require('gulp-ftp'),
+    gutil        = require('gulp-util');
 
-gulp.task('sass', function() {
-  return gulp.src('src/styles/sass/**/*.sass')
+gulp.task('scss', function() {
+  return gulp.src('src/styles/scss/**/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer())
     .pipe(gulp.dest('src/styles'))
@@ -54,11 +54,11 @@ gulp.task('htmlmin', function() {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('server', ['sass', 'js'], function() {
+gulp.task('server', ['scss', 'js'], function() {
 
   browserSync.init({server: 'src', notify: false});
 
-  gulp.watch('src/styles/sass/**/*.sass', ['sass']);
+  gulp.watch('src/styles/scss/**/*.scss', ['scss']);
   gulp.watch('src/scripts/common.js', ['js']);
   gulp.watch('src/images/**/*').on('change', browserSync.reload);
   gulp.watch('src/**/*.html').on('change', browserSync.reload);
@@ -78,6 +78,6 @@ gulp.task('ftp', ['build'], function() {
     .pipe(gutil.noop());
 });
 
-gulp.task('build', ['rmdist', 'sass', 'js', 'mincss', 'minjs', 'imagemin', 'htmlmin']);
+gulp.task('build', ['rmdist', 'scss', 'js', 'mincss', 'minjs', 'imagemin', 'htmlmin']);
 
 gulp.task('default', ['server']);
