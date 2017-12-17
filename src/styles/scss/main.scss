@@ -1,6 +1,3 @@
-@import 'libs';
-@import 'vars';
-
 /*
   http://meyerweb.com/eric/tools/css/reset/
   v2.0 | 20110126
@@ -61,34 +58,3 @@ table {
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
-
-/* Align */
-.center-h,
-.center-v,
-.center-hv {
-  position: absolute;
-}
-
-.center-h,
-.center-hv {
-  left: 50%;
-}
-
-.center-v,
-.center-hv {
-  top: 50%;
-}
-
-.center-h {
-  transform: translate(-50%, 0);
-}
-
-.center-v {
-  transform: translate(0, -50%);
-}
-
-.center-hv {
-  transform: translate(-50%, -50%);
-}
-
-@import 'media';

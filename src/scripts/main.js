@@ -10252,3 +10252,6 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
+$(document).ready(function () {
+  // Custom JS
+});

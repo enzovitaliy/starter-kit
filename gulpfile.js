@@ -23,7 +23,7 @@ gulp.task('scss', function() {
 gulp.task('js', function() {
   return gulp.src([
     'src/scripts/libs/jquery-3.2.1.js',
-    'src/scripts/common.js'
+    'src/scripts/custom.js'
     ])
     .pipe(concat('main.js'))
     .pipe(gulp.dest('src/scripts'))
@@ -59,7 +59,7 @@ gulp.task('server', ['scss', 'js'], function() {
   browserSync.init({server: 'src', notify: false});
 
   gulp.watch('src/styles/scss/**/*.scss', ['scss']);
-  gulp.watch('src/scripts/common.js', ['js']);
+  gulp.watch('src/scripts/custom.js', ['js']);
   gulp.watch('src/images/**/*').on('change', browserSync.reload);
   gulp.watch('src/**/*.html').on('change', browserSync.reload);
 
