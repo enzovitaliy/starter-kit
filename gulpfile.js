@@ -12,7 +12,7 @@ var gulp         = require('gulp'),
     ftp          = require('gulp-ftp'),
     gutil        = require('gulp-util');
 
-gulp.task('scss', function() {
+gulp.task('sass', function() {
   return gulp.src('src/styles/scss/**/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer())
@@ -54,11 +54,11 @@ gulp.task('htmlmin', function() {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('server', ['scss', 'js'], function() {
+gulp.task('server', ['sass', 'js'], function() {
 
   browserSync.init({server: 'src', notify: false});
 
-  gulp.watch('src/styles/scss/**/*.scss', ['scss']);
+  gulp.watch('src/styles/scss/**/*', ['sass']);
   gulp.watch('src/scripts/custom.js', ['js']);
   gulp.watch('src/images/**/*').on('change', browserSync.reload);
   gulp.watch('src/**/*.html').on('change', browserSync.reload);
@@ -78,6 +78,6 @@ gulp.task('ftp', ['build'], function() {
     .pipe(gutil.noop());
 });
 
-gulp.task('build', ['rmdist', 'scss', 'js', 'mincss', 'minjs', 'imagemin', 'htmlmin']);
+gulp.task('build', ['rmdist', 'sass', 'js', 'mincss', 'minjs', 'imagemin', 'htmlmin']);
 
 gulp.task('default', ['server']);

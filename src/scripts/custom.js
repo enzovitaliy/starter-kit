@@ -1,3 +1,3 @@
 $(document).ready(function () {
-  // Custom JS
+  // Custom scripts
 });

@@ -10253,5 +10253,5 @@ return jQuery;
 } );
 
 $(document).ready(function () {
-  // Custom JS
+  // Custom scripts
 });
