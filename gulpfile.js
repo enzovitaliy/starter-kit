@@ -22,6 +22,7 @@ gulp.task('sass', function() {
 
 gulp.task('js', function() {
   return gulp.src([
+    // Libraries
     'src/scripts/libs/jquery-3.2.1.js',
     'src/scripts/custom.js'
     ])
@@ -59,7 +60,7 @@ gulp.task('server', ['sass', 'js'], function() {
   browserSync.init({server: 'src', notify: false});
 
   gulp.watch('src/styles/scss/**/*', ['sass']);
-  gulp.watch('src/scripts/custom.js', ['js']);
+  gulp.watch('src/scripts/**/*.js', ['js']);
   gulp.watch('src/images/**/*').on('change', browserSync.reload);
   gulp.watch('src/**/*.html').on('change', browserSync.reload);
 
